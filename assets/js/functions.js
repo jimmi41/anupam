@@ -64,21 +64,13 @@ $( document ).ready(function() {
   });
 
   // swipe support for touch devices
-  // var targetElement = document.getElementById('viewport'),
-  //   mc = new Hammer(targetElement);
-  var targetElement = document.getElementById('viewport');
-  targetElement.addEventListener("touchstart", function (e) {
-    e.preventDefault();
-  }, { passive: false });
-
-  // Initialize Hammer.js for swipe support
-  var mc = new Hammer(targetElement);
+  var targetElement = document.getElementById('viewport'),
+      mc = new Hammer(targetElement);
   mc.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
-  mc.on('swipeup', function () {
-    updateHelper(1); // Pass 1 for swipe up
-  });
-  mc.on('swipedown', function () {
-    updateHelper(-1); // Pass -1 for swipe down
+  mc.on('swipeup swipedown', function(e) {
+
+    updateHelper(e);
+
   });
 
   $(document).keyup(function(e){
@@ -89,30 +81,9 @@ $( document ).ready(function() {
     }
 
   });
-  
-  function updateHelper(param) {
-    const curActive = $('.side-nav').find('.is-active');
-    const curPos = $('.side-nav').children().index(curActive);
-    const lastItem = $('.side-nav').children().length - 1;
-    const nextPos = param > 0 ? curPos + 1 : curPos - 1;
 
-    const currentSection = $('.main-content').children().eq(curPos);
-    const atBottom = currentSection.scrollTop() + currentSection.innerHeight() >= currentSection[0].scrollHeight;
-    const atTop = currentSection.scrollTop() === 0;
-
-    if ((param > 0 && atBottom) || (param < 0 && atTop)) {
-        if (param > 0 && curPos !== lastItem) {
-            updateNavs(nextPos);
-            updateContent(curPos, nextPos, lastItem);
-        } else if (param < 0 && curPos !== 0) {
-            updateNavs(nextPos);
-            updateContent(curPos, nextPos, lastItem);
-        }
-    }
-}
-  
   // determine scroll, swipe, and arrow key direction
-  function updateHelperOriginal(param) {
+  function updateHelper(param) {
 
     var curActive = $('.side-nav').find('.is-active'),
         curPos = $('.side-nav').children().index(curActive),
