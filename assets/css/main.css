@@ -895,7 +895,7 @@ body {
 .work--lockup .slider--item-description {
     display: none;
     max-width: 400px;
-    margin: 0 auto
+    margin: 0 auto;
 }
 
 .work--lockup .slider--item-image {
@@ -990,6 +990,8 @@ body {
     left: 0
 }
 
+
+
 @media (max-width: 900px) {
     .work--lockup .slider--item-image {
         width: 120px;
@@ -1029,13 +1031,32 @@ body {
 }
 
 @media (max-width: 600px) {
+    .work{
+        margin-top: 25px;
+        font-size: small;
+        height: auto;
+    }
+    .work h2{
+        display: none;
+    }
+    .slider--item-title{
+        font-size: small;
+    }
+
     .work--lockup .slider {
         width: auto
     }
-
     .work--lockup .slider--item-left,
     .work--lockup .slider--item-right {
         display: none
+    }
+    
+    
+    .work--lockup .slider--item-image {
+        margin-top: 25px;
+        display: block;
+        width: auto;
+        height: 1px;
     }
 }
 
